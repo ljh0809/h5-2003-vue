@@ -4,20 +4,24 @@
            <el-aside width="200px">Aside</el-aside>
            <el-container>
                <el-header>Header</el-header>
-               <el-main>Main</el-main>
+               <el-main><List></List></el-main>
+               
            </el-container>
+        <!-- <List></List> -->
        </el-container>
-
 </template>
 
 <script>
 // @ is an alias to /src
+import List from '../../components/product/List'
 export default {
-
-};
+  components:{
+    List
+  }
+}
 
 </script>
-<style lang="less">
+<style lang="less" scopde>
 
     .app-el-container{
         height: 100vh;

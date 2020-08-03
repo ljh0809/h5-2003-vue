@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style>
+<style >
     body,
     html,
     h1,

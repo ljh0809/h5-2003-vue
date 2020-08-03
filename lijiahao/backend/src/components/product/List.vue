@@ -1,12 +1,17 @@
 <!--  -->
 <template>
-<div class=''>
-  <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
-  </el-tabs>
+<div class="">
+<div class='main'>
+  <el-tabs type="border-card">
+  <el-tab-pane>
+    <span slot="label"><i class="el-icon-date"></i> 我的行程</span>
+    我的行程
+  </el-tab-pane>
+  <el-tab-pane label="消息中心">消息中心</el-tab-pane>
+  <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+  <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+</el-tabs>
+</div>
 </div>
 </template>
 
@@ -20,7 +25,7 @@ components: {},
 data() {
 //这里存放数据
 return {
-      activeName: 'second'
+     
 };
 },
 //监听属性 类似于data概念
@@ -29,9 +34,7 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      }
+    
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
@@ -51,5 +54,8 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 <style lang='less' scoped>
-
+  .main{
+    background-color:#fff;
+    height: 100%;
+  }
 </style>
