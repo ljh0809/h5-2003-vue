@@ -8,7 +8,7 @@ Vue.use(VueRouter)
       {
         path: '/about',
         name: 'About',
-        component: () => import('../views/Goods/Goods.vue')
+        component: () => import('../views/Goods/List')
       },
       {
         path: '/',
