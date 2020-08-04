@@ -17,13 +17,13 @@
             </el-select>
           </el-form-item>
           <el-form-item label="活动名称" label-width='100px'>
-            <el-input v-model="sizeForm.name" placeholder="活动名称"></el-input>
+            <el-input v-model="sizeForm.name1" placeholder="活动名称"></el-input>
           </el-form-item>
           <el-form-item label="活动副标题" label-width='100px'>
-            <el-input v-model="sizeForm.name" placeholder="活动副标题"></el-input>
+            <el-input v-model="sizeForm.name2" placeholder="活动副标题"></el-input>
           </el-form-item>
           <el-form-item label="活动价格描述" label-width='100px'>
-            <el-input v-model="sizeForm.name" placeholder="活动价格描述"></el-input>
+            <el-input v-model="sizeForm.name3" placeholder="活动价格描述"></el-input>
             <span>例如: 8折起 119元起  5000元封顶</span>
           </el-form-item>
 <!--          <el-form-item label="活动时间"  label-width='100px'>-->
@@ -127,7 +127,9 @@ export default {
     return {
       radio: '1',
       sizeForm: {
-        name: '',
+        name1: '',
+        name2: '',
+        name3: '',
         region: '',
         date1: '',
         date2: '',
