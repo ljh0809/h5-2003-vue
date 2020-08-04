@@ -17,13 +17,14 @@
             </el-select>
           </el-form-item>
           <el-form-item label="活动名称" label-width='100px'>
-            <el-input v-model="sizeForm.name"></el-input>
+            <el-input v-model="sizeForm.name" placeholder="活动名称"></el-input>
           </el-form-item>
           <el-form-item label="活动副标题" label-width='100px'>
-            <el-input v-model="sizeForm.name"></el-input>
+            <el-input v-model="sizeForm.name" placeholder="活动副标题"></el-input>
           </el-form-item>
           <el-form-item label="活动价格描述" label-width='100px'>
-            <el-input v-model="sizeForm.name"></el-input>
+            <el-input v-model="sizeForm.name" placeholder="活动价格描述"></el-input>
+            <span>例如: 8折起 119元起  5000元封顶</span>
           </el-form-item>
 <!--          <el-form-item label="活动时间"  label-width='100px'>-->
 <!--            <el-col :span="11">-->
@@ -112,8 +113,8 @@
 <!--        <el-radio v-model="radio" label="1">是</el-radio>-->
 <!--        <el-radio v-model="radio" label="2">否</el-radio>-->
 <!--      </div>-->
-      <el-row >
-        <el-button type="warning">发布活动</el-button>
+      <el-row class="bottom-btn-submit">
+        <el-button type="warning" >发布活动</el-button>
       </el-row>
     </div>   
   </div>
@@ -161,12 +162,16 @@ div.item-manage {
     }
   }
   div.manage-middle {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     overflow: hidden;
     border-bottom: 1px solid #ccc;
     div.manage-middle-left {
-      width: 400px;
+      width: 500px;
       float: left;
+      span {
+        color: #ccc;
+        font-size: 12px;
+      }
     }
     div.manage-middle-right {
       float: right;
@@ -202,11 +207,9 @@ div.item-manage {
     .bottom-chose-all {
       width:100%;
       height: 20px;
-      margin-top: 20px;
+      margin-top: 10px;
       display: flex;
       justify-content: center;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #ccc;
         .bottom-chose-product {
           font-size: 14px;
           margin-right:40px;
@@ -221,11 +224,16 @@ div.item-manage {
           }
         }
     }
-    .bottom-inp-all {
-      text-align: center;
-      margin: 20px 0;
-      font-size: 14px;
+    // .bottom-inp-all {
+    //   text-align: center;
+    //   margin: 20px 0;
+    //   font-size: 14px;
+    // }
+    .bottom-btn-submit {
+      text-align: right;
+      margin-bottom: 15px;
     }
+    
   }
 }
 </style>
