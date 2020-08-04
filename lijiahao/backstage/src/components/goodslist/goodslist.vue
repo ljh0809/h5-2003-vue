@@ -44,254 +44,15 @@
           </el-form>
         </div>
         <!-- 中间部分 -->
-        <div class="list-content">
-          <el-row class="list-content-title">
-            <el-col :span="6">
-              <div class="grid-content bg-purple-dark">
-                <el-checkbox v-model="checked">商品标题</el-checkbox>
-              </div>
-            </el-col>
-            <el-col :span="3">
-              <div>所属分类</div>
-            </el-col>
-            <el-col :span="4">
-              <div>所属材料商</div>
-            </el-col>
-            <el-col :span="2">
-              <div>区域</div>
-            </el-col>
-            <el-col :span="3">
-              <div>上下架</div>
-            </el-col>
-            <el-col :span="4">
-              <div>上传时间</div>
-            </el-col>
-            <el-col :span="2">
-              <div>操作</div>
-            </el-col>
-          </el-row>
-          <!-- 商品循环 -->
-          <div class="list-content-product">
-            <ul>
-              <!-- //loop -->
-              <li>
-                <el-row class="list-content-loop">
-                  <el-col :span="6">
-                    <div class="grid-content bg-purple-dark">
-                      <el-checkbox></el-checkbox>
-
-                      <div class="list-content-loop-img">
-                        <img src="../../assets/logo.png" alt />
-                      </div>
-
-                      <span>阳台洗衣柜带搓衣板 不锈钢浴室柜组合 现代简约落地式卫浴柜洗衣池</span>
-                    </div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div>瓷砖>抛轴砖</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div>汉斯格雅旗舰店</div>
-                  </el-col>
-                  <el-col :span="2">
-                    <div>苏州</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div>已下架</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div>2020/10/21&nbsp;24:00:00</div>
-                  </el-col>
-                  <el-col :span="2">
-                    <div>
-                      <a href="#" class="list-content-loop-look">预览</a>
-                    </div>
-                  </el-col>
-                </el-row>
-              </li>
-              <!-- //loop -->
-              <li>
-                <el-row class="list-content-loop">
-                  <el-col :span="6">
-                    <div class="grid-content bg-purple-dark">
-                      <el-checkbox></el-checkbox>
-
-                      <div class="list-content-loop-img">
-                        <img src="../../assets/logo.png" alt />
-                      </div>
-
-                      <span>阳台洗衣柜带搓衣板 不锈钢浴室柜组合 现代简约落地式卫浴柜洗衣池</span>
-                    </div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div>瓷砖>抛轴砖</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div>汉斯格雅旗舰店</div>
-                  </el-col>
-                  <el-col :span="2">
-                    <div>苏州</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div>已下架</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div>2020/10/21&nbsp;24:00:00</div>
-                  </el-col>
-                  <el-col :span="2">
-                    <div>
-                      <a href="#" class="list-content-loop-look">预览</a>
-                    </div>
-                  </el-col>
-                </el-row>
-              </li>
-              <!-- //loop -->
-              <li>
-                <el-row class="list-content-loop">
-                  <el-col :span="6">
-                    <div class="grid-content bg-purple-dark">
-                      <el-checkbox></el-checkbox>
-
-                      <div class="list-content-loop-img">
-                        <img src="../../assets/logo.png" alt />
-                      </div>
-
-                      <span>阳台洗衣柜带搓衣板 不锈钢浴室柜组合 现代简约落地式卫浴柜洗衣池</span>
-                    </div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div>瓷砖>抛轴砖</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div>汉斯格雅旗舰店</div>
-                  </el-col>
-                  <el-col :span="2">
-                    <div>苏州</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div>已下架</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div>2020/10/21&nbsp;24:00:00</div>
-                  </el-col>
-                  <el-col :span="2">
-                    <div>
-                      <a href="#" class="list-content-loop-look">预览</a>
-                    </div>
-                  </el-col>
-                </el-row>
-              </li>
-              <!-- //loop -->
-              <li>
-                <el-row class="list-content-loop">
-                  <el-col :span="6">
-                    <div class="grid-content bg-purple-dark">
-                      <el-checkbox></el-checkbox>
-
-                      <div class="list-content-loop-img">
-                        <img src="../../assets/logo.png" alt />
-                      </div>
-
-                      <span>阳台洗衣柜带搓衣板 不锈钢浴室柜组合 现代简约落地式卫浴柜洗衣池</span>
-                    </div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div>瓷砖>抛轴砖</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div>汉斯格雅旗舰店</div>
-                  </el-col>
-                  <el-col :span="2">
-                    <div>苏州</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div>已下架</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div>2020/10/21&nbsp;24:00:00</div>
-                  </el-col>
-                  <el-col :span="2">
-                    <div>
-                      <a href="#" class="list-content-loop-look">预览</a>
-                    </div>
-                  </el-col>
-                </el-row>
-              </li>
-              <!-- //loop -->
-              <li>
-                <el-row class="list-content-loop">
-                  <el-col :span="6">
-                    <div class="grid-content bg-purple-dark">
-                      <el-checkbox></el-checkbox>
-
-                      <div class="list-content-loop-img">
-                        <img src="../../assets/logo.png" alt />
-                      </div>
-
-                      <span>阳台洗衣柜带搓衣板 不锈钢浴室柜组合 现代简约落地式卫浴柜洗衣池</span>
-                    </div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div>瓷砖>抛轴砖</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div>汉斯格雅旗舰店</div>
-                  </el-col>
-                  <el-col :span="2">
-                    <div>苏州</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div>已下架</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div>2020/10/21&nbsp;24:00:00</div>
-                  </el-col>
-                  <el-col :span="2">
-                    <div>
-                      <a href="#" class="list-content-loop-look">预览</a>
-                    </div>
-                  </el-col>
-                </el-row>
-              </li>
-              <!-- //loop -->
-              <li>
-                <el-row class="list-content-loop">
-                  <el-col :span="6">
-                    <div class="grid-content bg-purple-dark">
-                      <el-checkbox></el-checkbox>
-
-                      <div class="list-content-loop-img">
-                        <img src="../../assets/logo.png" alt />
-                      </div>
-
-                      <span>阳台洗衣柜带搓衣板 不锈钢浴室柜组合 现代简约落地式卫浴柜洗衣池</span>
-                    </div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div>瓷砖>抛轴砖</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div>汉斯格雅旗舰店</div>
-                  </el-col>
-                  <el-col :span="2">
-                    <div>苏州</div>
-                  </el-col>
-                  <el-col :span="3">
-                    <div>已下架</div>
-                  </el-col>
-                  <el-col :span="4">
-                    <div>2020/10/21&nbsp;24:00:00</div>
-                  </el-col>
-                  <el-col :span="2">
-                    <div>
-                      <a href="#" class="list-content-loop-look">预览</a>
-                    </div>
-                  </el-col>
-                </el-row>
-              </li>
-            </ul>
-          </div>
-        </div>
+         <el-table>
+            <el-table-column type="selection" width="55"></el-table-column>
+            <el-table-column prop="ProductName" label="商品标题"> </el-table-column>
+            <el-table-column prop="ProductNum" label="货号"> </el-table-column>
+            <el-table-column prop="Region" label="区域"> </el-table-column>
+            <el-table-column prop="Status" label="上下架"> </el-table-column>
+            <el-table-column prop="Status" label="上传时间△"> </el-table-column>
+            <el-table-column  label="操作"></el-table-column>
+         </el-table>
 
         <!-- 底部 -->
         <div class="list-footer">
@@ -307,12 +68,15 @@
             <el-pagination
               class="list-footer-pagi"
               background
-              layout="prev, pager, next"
+              layout="prev, pager, next, sizes, total, jumper"
+
               :total="50"
             ></el-pagination>
           </el-row>
         </div>
       </el-tabs>
+
+      <!-- 小title -->
       <div class="list-title">
         <span>
           商品总数:
@@ -338,9 +102,16 @@
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: {},
+  methods: {
+    onSubmit() {
+      console.log("submit!");
+    },
+  },
   data() {
     //这里存放数据
     return {
+        //分页器的数据
+
       formInline: {
         user: "",
         region: "",
@@ -391,11 +162,7 @@ export default {
   //监控data中的数据变化
   watch: {},
   //方法集合
-  methods: {
-    onSubmit() {
-      console.log("submit!");
-    },
-  },
+
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
@@ -414,7 +181,6 @@ export default {
   position: relative;
   background-color: #fff;
   height: 100%;
-  
 
   .list-title {
     position: absolute;
@@ -430,58 +196,61 @@ export default {
   .block {
     display: inline-block;
   }
- 
+
   .list-title-sbm {
     position: absolute;
     right: -80px;
   }
   //中间部分
-  .list-content {
-    .list-content-title {
-      padding: 10px;
-      font-size: 12px;
-      background-color: rgb(235, 235, 235);
-    }
-    .list-content-product {
-      background-color: #fff;
-      margin-bottom: 20px;
+//   .list-content {
       
-      //循环数据
-      .list-content-loop {
-        line-height: 70px;
-        font-size: 12px;
-        font-weight: 600;
-        .grid-content {
-          vertical-align: middle;
-          .list-content-loop-img {
-            display: inline-block;
-            width: 35px;
-            height: 50px;
-            vertical-align: middle;
-            margin: 0 10px;
-            img {
-              display: inline-block;
-              width: 100%;
-              height: 100%;
-            }
-          }
-          span {
-            display: inline-block;
-            font-size: 9px;
-            line-height: 12px;
-            width: 180px;
-            font-weight: 800;
-          }
-        }
-        .list-content-loop-look {
-          color: rgb(250, 169, 82);
-        }
-      }
-    }
-  }
+//     .list-content-title {
+//       padding: 10px;
+//       font-size: 12px;
+//       background-color: rgb(235, 235, 235);
+      
+//     }
+//     .list-content-product {
+//       background-color: #fff;
+//       margin-bottom: 20px;
+
+//       //循环数据
+//       .list-content-loop {
+//         line-height: 70px;
+//         font-size: 12px;
+//         font-weight: 600;
+//         .grid-content {
+//           vertical-align: middle;
+//           .list-content-loop-img {
+//             display: inline-block;
+//             width: 35px;
+//             height: 50px;
+//             vertical-align: middle;
+//             margin: 0 10px;
+//             img {
+//               display: inline-block;
+//               width: 100%;
+//               height: 100%;
+//             }
+//           }
+//           span {
+//             display: inline-block;
+//             font-size: 9px;
+//             line-height: 12px;
+//             width: 180px;
+//             font-weight: 800;
+//           }
+//         }
+//         .list-content-loop-look {
+//           color: rgb(250, 169, 82);
+//         }
+//       }
+//     }
+//   }
 
   //底部
   .list-footer {
+    padding: 5px 0;
     overflow: hidden;
     position: relative;
     .el-button--mini {
@@ -491,13 +260,13 @@ export default {
       position: absolute;
       font-size: 16px;
       right: 340px;
-      bottom: 3px;
+      bottom: 0px;
     }
     .list-footer-pagi {
       position: absolute;
       display: inline-block;
       right: 20px;
-      bottom: 0;
+      bottom: -3px;
     }
   }
 }
