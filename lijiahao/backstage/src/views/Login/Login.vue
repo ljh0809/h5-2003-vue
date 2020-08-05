@@ -10,7 +10,7 @@
               </li>
               <li>
                   <span>密码：</span>
-                  <el-input placeholder="请输入密码" v-model="password" show-password></el-input>
+                  <el-input placeholder="请输入密码" v-model="password" show-password @keyup.enter.native="send"></el-input>
               </li>
               <li><el-button  type="primary"  class="btn" @click="send">登录</el-button></li>
           </ul>
@@ -60,10 +60,13 @@
 </script>
 
 <style lang="less" scoped>
+
     .login{
+        width: 100%;
         height: 100vh;
         position: relative;
-        background: rgb(112,187,231);
+        background-image: url("../../assets/images/login-bg.jpg");
+        background-size: 100% 100%;
         h1{
             position: absolute;
             top: 0;
@@ -79,7 +82,7 @@
         .login-tab{
             width: 480px;
             height: 375px;
-            border: 4px solid #1C77AC;
+            border: 4px solid rgba(255,255,255,0.2);
             position: absolute;
             top: 0;
             left: 0;
@@ -94,7 +97,7 @@
                 color: #fff;
                 font-size: 14px;
                 text-indent: 24px;
-                border-bottom: 1px solid #478fca;
+                border-bottom: 1px solid rgba(255,255,255,0.2);
             }
             ul{
                 padding: 40px  ;

@@ -9,7 +9,7 @@ mongoose.connect('mongodb://localhost:27017/backstage', {
 
 mongoose.connection.on('connected', () => {
     // 添加数据
-    // require('./add/product_add');  // 添加商品列表数据   
+    // require('./add/product_add');  // 添加商品列表数据
 
     // 处理数据请求
     server.use(express.json());

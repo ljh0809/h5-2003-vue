@@ -7,42 +7,7 @@
                 <el-tab-pane label="已上架"></el-tab-pane>
                 <el-tab-pane label="已下架"></el-tab-pane>
 
-                <div class="list-select">
-                    <el-form :inline="true" :model="formInline" class="demo-form-inline">
-                        <el-select v-model="value2" placeholder="所有类别" size="mini">
-                            <el-option label="贵的" value="expensive"></el-option>
-                            <el-option label="便宜的" value="cheap"></el-option>
-                            <el-option label="又贵又便宜的" value="weird"></el-option>
-                        </el-select>
-                        <el-select v-model="value3" placeholder="地区选择" size="mini">
-                            <el-option label="上海" value="shanghai"></el-option>
-                            <el-option label="北京" value="beijing"></el-option>
-                            <el-option label="杭州" value="hangzhou"></el-option>
-                        </el-select>
 
-                        <!-- 时间 -->
-                        <div class="block">
-                            <span class="demonstration"></span>
-                            <el-date-picker
-                                    v-model="value1"
-                                    type="datetimerange"
-                                    range-separator="至"
-                                    start-placeholder="开始日期"
-                                    end-placeholder="结束日期"
-                                    size="mini"
-                            ></el-date-picker>
-                        </div>
-                        <!-- 上下架 -->
-                        <el-select v-model="value4" placeholder="上下架" size="mini">
-                            <el-option label="已上架" value="up"></el-option>
-                            <el-option label="已下架" value="down"></el-option>
-                        </el-select>
-
-                        <el-form-item>
-                            <el-button type="primary" @click="onSubmit" size="mini" class="list-title-sbm">查询</el-button>
-                        </el-form-item>
-                    </el-form>
-                </div>
                 <!-- 中间部分 -->
                 <el-table :data="list">
                     <el-table-column prop="ProductName" label="商品标题" width="400" height="36"></el-table-column>
@@ -50,12 +15,12 @@
                     <el-table-column prop="Region" label="区域" width="100"></el-table-column>
                     <el-table-column prop="Status" label="上下架" width="90"></el-table-column>
                     <el-table-column prop="PresentPrice" label="价格" width="90"></el-table-column>
-                    <el-table-column prop="JoiningTime" label="上传时间△" width="140"></el-table-column>
+                    <el-table-column prop="JoiningTime" label="上传时间△" width="180"></el-table-column>
                     <el-table-column label="操作">
                         <template slot-scope="scope">
                             <el-button size="mini" @click="alter(scope.$index, scope.row)">编辑</el-button>
                             <el-button size="mini" type="danger" @click="open(scope.$index, scope.row)">删除</el-button>
-                            <el-button size="mini" @click="statusChange(scope.$index, scope.row)">change</el-button>
+                            <el-button size="mini" @click="statusChange(scope.$index, scope.row)">修改状态</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -68,7 +33,7 @@
                                 layout="prev, pager, next, sizes, total"
                                 :total="total"
                                 :page-size="pagesize"
-                                :page-sizes="[6]"
+                                :page-sizes="[pagesize]"
                                 :current-page="current"
                                 @current-change="handleCurrentChange"
                         ></el-pagination>
@@ -80,11 +45,11 @@
             <div class="list-title">
         <span>
           商品总数:
-          <i>{{total}}</i> |
+          <i>{{total}}</i>
         </span>
                 <span>
           已上架是商品:
-          <i>{{up}}</i> |
+          <i>{{up}}</i>
         </span>
                 <span>
           已下架商品:
@@ -96,24 +61,17 @@
 </template>
 
 <script>
-    //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
-    //例如：import 《组件名称》 from '《组件路径》';
-
     export default {
         //import引入的组件需要注入到对象中才能使用
         components: {},
 
         methods: {
-            //查询
-            onSubmit() {
-
-            },
             getlist() {
                 this.axios
                     .get("/api/product/list", {
                         params: {
                             _page: this.current,
-                            _limit: 6,
+                            _limit: this.pagesize,
                         },
                     })
                     .then((data) => {
@@ -195,7 +153,7 @@
                 this.getlist();
             },
             alter(index, row) {
-                this.$prompt("请自己输入商品价格", "恭喜中奖", {
+                this.$prompt("重新定价", "注意", {
                     confirmButtonText: "确定",
                     cancelButtonText: "取消",
                 })
@@ -249,7 +207,7 @@
             return {
                 //分页器的数据
                 list: [],
-                pagesize: 6,
+                pagesize: 8,
                 current: 1,
                 total: 0,
 
@@ -303,7 +261,7 @@
             up: function () {
                 let num = 0;
                 this.list.forEach((i) => {
-                    if (i.Status == "已上架") {
+                    if (i.Status === "已上架") {
                         num++;
                     }
                 });
