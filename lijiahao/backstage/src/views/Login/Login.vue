@@ -43,7 +43,7 @@
                         pwd:this.password
                     }
                 }).then(res=>{
-                    // console.log(res)
+                    console.log(res)
                     if(res.data.code === 200){
                         this.set(this.token,res.data.token)
                         this.set(this.user,this.input)
