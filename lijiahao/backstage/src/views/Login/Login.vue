@@ -12,7 +12,7 @@
                   <span>密码：</span>
                   <el-input placeholder="请输入密码" v-model="password" show-password></el-input>
               </li>
-              <li><el-button  type="primary"  class="btn">登录</el-button></li>
+              <li><el-button  type="primary"  class="btn" @click="send">登录</el-button></li>
           </ul>
 
       </div>
@@ -21,11 +21,38 @@
 
 <script>
     export default {
-        name: '',
         data() {
             return {
                 input: '',
-                password:''
+                password:'',
+                token:'token',
+                user:'user'
+            }
+        },
+        methods:{
+            set(key,data){
+                localStorage.setItem(key,JSON.stringify(data))
+            },
+            send(){
+                this.axios({
+                    url:'/api/login',
+                    method:'post',
+                    data:{
+                        user:this.input,
+                        pwd:this.password
+                    }
+                }).then(res=>{
+                    console.log(res)
+                    if(res.data.code === 200){
+                        this.set(this.token,res.data.token)
+                        this.set(this.user,this.input)
+                        this.$router.push('/index')
+                    }else {
+                        alert(res.data.msg)
+                        this.input = '';
+                        this.password = ''
+                    }
+                })
             }
         }
     };

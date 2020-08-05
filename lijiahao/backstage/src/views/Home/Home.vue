@@ -3,13 +3,14 @@
         <el-header>
             <h1>子然电商后台管理系统</h1>
             <div class="el-login-username">
-                <el-dropdown >
+                <el-dropdown @command="handleCommand">
                     <span class="el-dropdown-link">
-                        admin<i class="el-icon-arrow-down el-icon--right"></i>
+                       欢迎您 {{username}}
+                        <i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>切换账户</el-dropdown-item>
-                        <el-dropdown-item>退出登录</el-dropdown-item>
+<!--                        <el-dropdown-item>切换账户</el-dropdown-item>-->
+                        <el-dropdown-item >退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
@@ -22,8 +23,7 @@
                 <el-menu
                         default-active="2"
                         class="el-menu-vertical-demo"
-                        @open="handleOpen"
-                        @close="handleClose"
+
                         background-color="#545c64"
                         text-color="#fff"
                 >
@@ -105,15 +105,30 @@
 <script>
     // @ is an alias to /src
     export default {
-        methods: {
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            },
-
+        data(){
+            return{
+                user:'user',
+                token:'token',
+                username:'',
+            }
         },
+        methods:{
+            handleCommand() {
+                this.remove(this.user)
+                this.remove(this.token)
+                this.$message('退出成功');
+                this.$router.push('/login')
+            },
+            get(){
+                return this.username = JSON.parse(localStorage.getItem(this.user)||[])
+            },
+            remove(key){
+              return  localStorage.removeItem(key)
+            }
+        },
+        mounted() {
+            this.get()
+        }
 
     };
 

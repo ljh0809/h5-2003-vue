@@ -44,9 +44,9 @@
     .top{
         background-color: #fff;
         min-width: 700px;
-        padding: 80px 200px;
+        padding: 80px 0;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         .content{
             width: 300px;
             height: 100px;
@@ -54,7 +54,7 @@
             
             display: flex;
             padding: 0 70px;
-            justify-content: space-between;
+            justify-content: space-evenly;
             align-items: center;
             box-sizing: border-box;
             i{

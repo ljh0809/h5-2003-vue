@@ -26,15 +26,6 @@
                             <el-input v-model="sizeForm.name3" placeholder="活动价格描述"></el-input>
                             <span>例如: 8折起 119元起  5000元封顶</span>
                         </el-form-item>
-                        <!--          <el-form-item label="活动时间"  label-width='100px'>-->
-                        <!--            <el-col :span="11">-->
-                        <!--              <el-date-picker type="date" placeholder="选择日期" v-model="sizeForm.date1" style="width: 100%;"></el-date-picker>-->
-                        <!--            </el-col>-->
-                        <!--            <el-col class="line" :span="2">-</el-col>-->
-                        <!--            <el-col :span="11">-->
-                        <!--              <el-time-picker placeholder="选择时间" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>-->
-                        <!--            </el-col>-->
-                        <!--          </el-form-item>-->
                     </el-form>
                 </div>
                 <!--      <div class="manage-middle-right">-->
@@ -48,74 +39,47 @@
                 <!--          <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>-->
                 <!--        </el-upload>-->
                 <!--      </div>-->
-            </div>
-            <div class="manage-bottom">
-                <p class="bottom-chose-type">请选择活动商品类型</p>
-                <div class="bottom-all-imfo">
-                    <div class="bottom-imfo bottom-1">
-                        <dl>
-                            <img src="../../../public/images/item_01.jpg" alt="">
-                        </dl>
-                        <dt>
-                            基础建材
-                        </dt>
-                    </div>
-                    <div class="bottom-imfo bottom-2">
-                        <dl>
-                            <img src="../../../public/images/item_02.jpg" alt="">
-                        </dl>
-                        <dt>
-                            基础建材
-                        </dt>
-                    </div>
-                    <div class="bottom-imfo bottom-3">
-                        <dl>
-                            <img src="../../../public/images/item_03.jpg" alt="">
-                        </dl>
-                        <dt>
-                            基础建材
-                        </dt>
-                    </div>
-                    <div class="bottom-imfo bottom-4">
-                        <dl>
-                            <img src="../../../public/images/item_04.jpg" alt="">
-                        </dl>
-                        <dt>
-                            基础建材
-                        </dt>
-                    </div>
-                    <div class="bottom-imfo bottom-5">
-                        <dl>
-                            <img src="../../../public/images/item_05.jpg" alt="">
-                        </dl>
-                        <dt>
-                            基础建材
-                        </dt>
-                    </div>
-                    <div class="bottom-imfo bottom-6">
-                        <dl>
-                            <img src="../../../public/images/item_06.jpg" alt="">
-                        </dl>
-                        <dt>
-                            基础建材
-                        </dt>
-                    </div>
-                </div>
-                <el-row>
-                    <el-button type="success" >选择活动商品</el-button>
-                </el-row>
-                <div class="bottom-chose-all">
-                    <p class="bottom-chose-product">已选择商品: <span>220个</span></p>
-                    <p class="bottom-chose-business">已选择商家: <span>12个</span></p>
-                </div>
-                <!--      <div class="bottom-inp-all">-->
-                <!--        <span class="bottom-inp-chose">是否上架:  </span>-->
-                <!--        <el-radio v-model="radio" label="1">是</el-radio>-->
-                <!--        <el-radio v-model="radio" label="2">否</el-radio>-->
-                <!--      </div>-->
                 <el-row class="bottom-btn-submit">
                     <el-button type="warning" >发布活动</el-button>
                 </el-row>
+            </div>
+            <div class="manage-bottom">
+                <el-table
+                        :data="tableData"
+                        style="width: 100%">
+                    <el-table-column
+                            label="日期"
+                            width="180">
+                        <template slot-scope="scope">
+                            <i class="el-icon-time"></i>
+                            <span style="margin-left: 10px">{{ scope.row.date }}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column
+                            label="姓名"
+                            width="180">
+                        <template slot-scope="scope">
+                            <el-popover trigger="hover" placement="top">
+                                <p>姓名: {{ scope.row.name }}</p>
+                                <p>住址: {{ scope.row.address }}</p>
+                                <div slot="reference" class="name-wrapper">
+                                    <el-tag size="medium">{{ scope.row.name }}</el-tag>
+                                </div>
+                            </el-popover>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作">
+                        <template slot-scope="scope">
+                            <el-button
+                                    size="mini"
+                                    @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                            <el-button
+                                    size="mini"
+                                    type="danger"
+                                    @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
             </div>
         </div>
     </div>
@@ -137,14 +101,35 @@
                     type: [],
                     resource: '',
                     desc: '',
-                }
+                },
+                tableData: [{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1517 弄'
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                }, {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1516 弄'
+                }]
             };
         },
-        // methods: {
-        //   onSubmit() {
-        //     console.log('submit!');
-        //   }
-        // }
+        methods: {
+            handleEdit(index, row) {
+                console.log(index, row);
+            },
+            handleDelete(index, row) {
+                console.log(index, row);
+            }
+        }
+
     };
 </script>
 <style lang='less' scoped>
@@ -169,7 +154,7 @@
             border-bottom: 1px solid #ccc;
             div.manage-middle-left {
                 width: 500px;
-                float: left;
+                /*float: left;*/
                 span {
                     color: #ccc;
                     font-size: 12px;
@@ -226,13 +211,7 @@
                     }
                 }
             }
-            // .bottom-inp-all {
-            //   text-align: center;
-            //   margin: 20px 0;
-            //   font-size: 14px;
-            // }
             .bottom-btn-submit {
-                text-align: right;
                 margin-bottom: 15px;
             }
 

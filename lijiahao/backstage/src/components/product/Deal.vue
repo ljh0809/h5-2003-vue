@@ -34,7 +34,7 @@
         订单管理
         <span>订单列表管理今日已完成更新</span>
       </h3>
-      <el-table :data="listArr" border style="width: 100%">
+      <el-table :data="listArr" border style="width: 100%" >
         <el-table-column fixed prop="ProductNum" label="产品编号" width="100"></el-table-column>
         <el-table-column prop="JoiningTime" label="日期" width="180"></el-table-column>
         <el-table-column prop="Region" label="地区" width="60"></el-table-column>
@@ -73,7 +73,7 @@ export default {
       handleClick(row) {
         // console.log(row);
         this.axios({
-            url:'/api/deleteProduct',
+            url:'/api/product/deleteProduct',
             method:'post',
             data:{
                 product_num:row.ProductNum
@@ -81,7 +81,6 @@ export default {
         })
           .then(()=>{
               this.getData();
-              this.del++
           })
       },
         //获取数据
