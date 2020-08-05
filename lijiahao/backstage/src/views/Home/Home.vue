@@ -119,9 +119,11 @@
                 this.$message('退出成功');
                 this.$router.push('/login')
             },
+            //获取本地存储
             get(){
                 return this.username = JSON.parse(localStorage.getItem(this.user)||[])
             },
+            //删除本地存储
             remove(key){
               return  localStorage.removeItem(key)
             }

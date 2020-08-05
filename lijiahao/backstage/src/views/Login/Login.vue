@@ -30,6 +30,7 @@
             }
         },
         methods:{
+            //封装设置本地存储
             set(key,data){
                 localStorage.setItem(key,JSON.stringify(data))
             },
