@@ -37,11 +37,6 @@
                         @prev-click='prevClick'
                         @next-click='nextClick'
                 ></el-pagination>
-                <!--
-                  :total  总条目数
-                  :page-size  每页显示条目个数
-                  :current-page  当前页数
-                 -->
             </div>
         </div>
     </div>
