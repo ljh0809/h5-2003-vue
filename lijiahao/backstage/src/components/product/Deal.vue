@@ -86,14 +86,14 @@ export default {
         //获取数据
         getData(){
             this.axios({
-                url:'/api/list',
+                url:'/api/product/list',
                 method:'get',
                 params:{
                     _page:this.pageNum,
                     _limit:5
                 }
             }).then(res=>{
-                console.log(res)
+                // console.log(res)
                 this.done = 0;
                 this.incomplete = 0;
                 this.listArr = res.data.data;
