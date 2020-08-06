@@ -1,23 +1,37 @@
 <!--  -->
 <template>
 <div class='user'>
-  <p>用户名 :<span>张三</span></p>
-  <p>性别 :<span>男</span></p>
-  <p>年龄 :<span>24</span></p>
-  <p>移动电话 :<span>13578983543</span></p>
-  <p>电子邮件 :<span>38275040281@qq.com</span></p>
-  <p>QQ :<span>38275040281</span></p>
-  <p>权限 :<span>普通管理员</span></p>
-  <p>注册时间 :<span>2020-4-2</span></p>
-  <div class="btn">
-    <el-button type="primary" plain>修改信息</el-button>
-    <el-button type="danger" plain>修改密码</el-button>
-  </div>
+  <p>用户名 :<span>{{personData.name}}</span></p>
+  <p>性别 :<span>{{personData.sex}}</span></p>
+  <p>年龄 :<span>{{personData.age}}</span></p>
+  <p>移动电话 :<span>{{personData.tel}}</span></p>
+  <p>电子邮件 :<span>{{personData.email}}</span></p>
+  <p>QQ :<span>{{personData.qq}}</span></p>
+  <p>权限 :<span>{{personData.power}}</span></p>
+  <p>注册时间 :<span>{{personData.registerTime}}</span></p>
 </div>
 </template>
 
 <script>
-
+    import {mapState} from 'vuex'
+    export default {
+        data(){
+         return  {
+             // userData:[]
+         }
+        },
+        computed:
+           mapState(['personData'])
+        ,
+        methods:{
+            getData(){
+                this.$store.dispatch('getPower')
+            }
+        },
+        mounted() {
+            this.getData()
+        }
+    }
 </script>
 <style lang='less' scoped>
 .user{

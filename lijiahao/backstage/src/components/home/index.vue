@@ -1,11 +1,11 @@
 <template>
     <div class="home">
         <div class="top">
-            <div class="content" style="background-color: rgba(196,189,231);">
+            <div class="content" style="background-color: rgb(196,189,231);">
                 <i class="el-icon-s-shop"></i>
                 <span>新增材料商</span>
             </div>
-            <div class="content" style="background-color: rgba(226,213,111);">
+            <div class="content" style="background-color: rgb(226,213,111);">
                 <i class="el-icon-star-on"></i>
                 <span>新增精选特卖</span>
             </div>
@@ -13,30 +13,67 @@
         <div class="bottom">
             <div class="btm btm-1">
                 <i class="el-icon-user-solid"></i>
-                <p>11047</p>
+                <p>{{count}}</p>
                 <span>总用户人数</span>
             </div>
             <div class="btm btm-2">
                 <i class="el-icon-box"></i>
-                <p>40</p>
-                <span>材料商</span>
+                <p>{{normal}}</p>
+                <span>普通用户</span>
             </div>
             <div class="btm btm-3">
                 <i class="el-icon-pie-chart"></i>
-                <p>503</p>
-                <span>设计师</span>
+                <p>{{gold}}</p>
+                <span>黄金会员</span>
             </div>
             <div class="btm btm-4">
                 <i class="el-icon-data-line"></i>
-                <p>10504</p>
-                <span>C端用户</span>
+                <p>{{sup}}</p>
+                <span>超级会员</span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    
+    import {mapState,mapActions} from 'vuex'
+    export default {
+        data() {
+            return {
+                normal: 0,
+                gold: 0,
+                sup: 0
+            }
+        },
+        methods: {
+            ...mapActions(['getData']),
+            getUser(){
+              this.userData.map(item=>{
+                  if(item.power === '超级管理员'){
+                      return this.sup++
+                  }else if(item.power === '普通用户'){
+                      this.normal++
+                  }else {
+                      this.gold++
+                  }
+              })
+
+            }
+        },
+
+        computed: {
+            ...mapState(['userData', 'count']),
+        },
+
+
+        created() {
+            // console.log(this.userData)
+        },
+        mounted() {
+            this.getData({pageNum: 1, limit: this.count})
+            this.getUser()
+        }
+    }
 </script>
 
 <style lang="less" scoped>

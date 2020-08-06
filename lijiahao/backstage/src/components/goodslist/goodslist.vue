@@ -2,14 +2,14 @@
 <template>
     <div class>
         <div class="main">
-            <el-tabs type="border-card">
+            <el-tabs type="border-card" @tab-click="changes">
                 <el-tab-pane label="全部商品"></el-tab-pane>
                 <el-tab-pane label="已上架"></el-tab-pane>
                 <el-tab-pane label="已下架"></el-tab-pane>
 
 
                 <!-- 中间部分 -->
-                <el-table :data="list">
+                <el-table :data="filterArr">
                     <el-table-column prop="ProductName" label="商品标题" width="400" height="36"></el-table-column>
                     <el-table-column prop="ProductNum" label="货号" width="100"></el-table-column>
                     <el-table-column prop="Region" label="区域" width="100"></el-table-column>
@@ -64,8 +64,23 @@
     export default {
         //import引入的组件需要注入到对象中才能使用
         components: {},
+        data() {
+            //这里存放数据
+            return {
+                //分页器的数据
+                list: [],
+                pagesize: 8,
+                current: 1,
+                total: 0,
+                index:''
 
+            };
+        },
         methods: {
+            changes(tab){
+                this.index = tab.index
+            },
+
             getlist() {
                 this.axios
                     .get("/api/product/list", {
@@ -202,62 +217,19 @@
                 this.getlist();
             },
         },
-        data() {
-            //这里存放数据
-            return {
-                //分页器的数据
-                list: [],
-                pagesize: 8,
-                current: 1,
-                total: 0,
 
-                formInline: {
-                    user: "",
-                    region: "",
-                },
-
-                //时间选择
-                pickerOptions: {
-                    shortcuts: [
-                        {
-                            text: "最近一周",
-                            onClick(picker) {
-                                const end = new Date();
-                                const start = new Date();
-                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-                                picker.$emit("pick", [start, end]);
-                            },
-                        },
-                        {
-                            text: "最近一个月",
-                            onClick(picker) {
-                                const end = new Date();
-                                const start = new Date();
-                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-                                picker.$emit("pick", [start, end]);
-                            },
-                        },
-                        {
-                            text: "最近三个月",
-                            onClick(picker) {
-                                const end = new Date();
-                                const start = new Date();
-                                start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-                                picker.$emit("pick", [start, end]);
-                            },
-                        },
-                    ],
-                },
-                value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-                value2: "",
-                value3: "",
-                value4: "",
-                value5: "",
-                checked: false,
-            };
-        },
         //监听属性 类似于data概念
         computed: {
+            filterArr(){
+                if(this.index === '0'){
+                    return this.list
+                }else if(this.index === '1'){
+                    return this.list.filter(item=>item.Status === '已上架')
+                }else if(this.index === '2'){
+                    return this.list.filter(item=>item.Status === '已下架')
+                }
+                return  this.list
+            },
             up: function () {
                 let num = 0;
                 this.list.forEach((i) => {
