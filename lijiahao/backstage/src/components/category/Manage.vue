@@ -10,20 +10,20 @@
                     <el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
                         <el-form-item label="活动所属地区"  label-width='100px'>
                             <el-select v-model="sizeForm.region" placeholder="请选择活动区域">
-                                <el-option label="北京" value="beijing"></el-option>
-                                <el-option label="上海" value="shanghai"></el-option>
-                                <el-option label="广州" value="guangzhou"></el-option>
-                                <el-option label="深圳" value="shenzhen"></el-option>
+                                <el-option label="北京" value="北京"></el-option>
+                                <el-option label="上海" value="上海"></el-option>
+                                <el-option label="广州" value="广州"></el-option>
+                                <el-option label="深圳" value="深圳"></el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="活动名称" label-width='100px'>
-                            <el-input v-model="sizeForm.name1" placeholder="活动名称"></el-input>
+                        <el-form-item label="姓名" label-width='100px'>
+                            <el-input v-model="sizeForm.name" placeholder="姓名"></el-input>
                         </el-form-item>
-                        <el-form-item label="活动副标题" label-width='100px'>
-                            <el-input v-model="sizeForm.name2" placeholder="活动副标题"></el-input>
+                        <el-form-item label="活动名称" label-width='100px'>
+                            <el-input v-model="sizeForm.active" placeholder="活动名称"></el-input>
                         </el-form-item>
                         <el-form-item label="活动价格描述" label-width='100px'>
-                            <el-input v-model="sizeForm.name3" placeholder="活动价格描述"></el-input>
+                            <el-input v-model="sizeForm.price" placeholder="活动价格描述"></el-input>
                             <span>例如: 8折起 119元起  5000元封顶</span>
                         </el-form-item>
                     </el-form>
@@ -40,11 +40,13 @@
                 <!--        </el-upload>-->
                 <!--      </div>-->
                 <el-row class="bottom-btn-submit">
-                    <el-button type="warning" >发布活动</el-button>
+                    <el-button type="warning" @click="submit">发布活动</el-button>
                 </el-row>
             </div>
             <div class="manage-bottom">
                 <el-table
+                        height='250'
+                        max-height="250"
                         :data="tableData"
                         style="width: 100%">
                     <el-table-column
@@ -55,28 +57,63 @@
                             <span style="margin-left: 10px">{{ scope.row.date }}</span>
                         </template>
                     </el-table-column>
+
                     <el-table-column
                             label="姓名"
-                            width="180">
+                            width="150">
                         <template slot-scope="scope">
-                            <el-popover trigger="hover" placement="top">
-                                <p>姓名: {{ scope.row.name }}</p>
-                                <p>住址: {{ scope.row.address }}</p>
+                            <el-popover placement="top">
                                 <div slot="reference" class="name-wrapper">
                                     <el-tag size="medium">{{ scope.row.name }}</el-tag>
                                 </div>
                             </el-popover>
                         </template>
                     </el-table-column>
+
+                    <el-table-column
+                            label="地区"
+                            width="150">
+                        <template slot-scope="scope">
+                            <el-popover placement="top">
+                                <div slot="reference" class="name-wrapper">
+                                    <el-tag size="medium">{{ scope.row.region }}</el-tag>
+                                </div>
+                            </el-popover>
+                        </template>
+                    </el-table-column>
+
+                    <el-table-column
+                            label="活动名称"
+                            width="150">
+                        <template slot-scope="scope">
+                            <el-popover placement="top">
+                                <div slot="reference" class="name-wrapper">
+                                    <el-tag size="medium">{{ scope.row.active }}</el-tag>
+                                </div>
+                            </el-popover>
+                        </template>
+                    </el-table-column>
+
+                    <el-table-column
+                            label="价格"
+                            width="120">
+                        <template slot-scope="scope">
+                            <el-popover placement="top">
+                                <div slot="reference" class="name-wrapper">
+                                    <el-tag size="medium">{{ scope.row.price }}</el-tag>
+                                </div>
+                            </el-popover>
+                        </template>
+                    </el-table-column>
+
                     <el-table-column label="操作">
                         <template slot-scope="scope">
                             <el-button
-                                    size="mini"
-                                    @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                            <el-button
-                                    size="mini"
-                                    type="danger"
-                                    @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                                    @click.native.prevent="deleteRow(scope.$index, tableData)"
+                                    type="text"
+                                    size="small">
+                                移除
+                            </el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -91,10 +128,10 @@
             return {
                 radio: '1',
                 sizeForm: {
-                    name1: '',
-                    name2: '',
-                    name3: '',
+                    name: '',
                     region: '',
+                    active: '',
+                    price: '',
                     date1: '',
                     date2: '',
                     delivery: false,
@@ -102,32 +139,43 @@
                     resource: '',
                     desc: '',
                 },
-                tableData: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }]
+                tableData: [],
+                user:'',
             };
         },
         methods: {
-            handleEdit(index, row) {
-                console.log(index, row);
+            deleteRow(index, rows) {
+                rows.splice(index, 1);
             },
-            handleDelete(index, row) {
-                console.log(index, row);
-            }
+            submit() {
+                let data = new Date(parseInt(Date.now())).toLocaleString().slice(0,-10);
+                let name = this.sizeForm.name;
+                let region = this.sizeForm.region;
+                let active = this.sizeForm.active;
+                let price = this.sizeForm.price;
+                let obj = {
+                    date:data,
+                    name:name,
+                    region:region,
+                    active:active,
+                    price:price
+                }
+                if(name==='') {
+                    this.$message.error('名字不能为空哦!');
+                    return;
+                }else if(region==='') {
+                    this.$message.error('地区不能为空哦!');
+                    return;
+                }else if(active==='') {
+                    this.$message.error('活动不能为空哦!');
+                    return;
+                }else if(price==='') {
+                    this.$message.error('价格不能为空哦!');
+                    return;
+                }
+                this.tableData.push(obj)
+            },
+
         }
 
     };
@@ -216,5 +264,15 @@
             }
 
         }
+    }
+    .el-tag--medium {
+        color: #000;
+        border-style:none;
+        background-color: transparent;
+    }
+    .el-button--text {
+        background-color: rgb(161, 63, 63);
+        color: #fff;
+        width: 50px;
     }
 </style>

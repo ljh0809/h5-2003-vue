@@ -61,6 +61,7 @@
 </template>
 
 <script>
+    import {mapActions,mapState} from 'vuex'
     export default {
         //import引入的组件需要注入到对象中才能使用
         components: {},
@@ -77,6 +78,7 @@
             };
         },
         methods: {
+            ...mapActions(['getPower']),
             changes(tab){
                 this.index = tab.index
             },
@@ -117,36 +119,44 @@
             },
             //修改状态
             statusChange(index, row) {
-                console.log(row);
-                if (row.Status === "已上架") {
-                    this.axios
-                        .post("/api/product/changeStatus", {
-                            product_num: row.ProductNum,
-                            status: 5,
-                        })
-                        .then((res) => {
-                            console.log(res);
-                            this.getlist();
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        });
-                } else if (row.Status === "已下架") {
-                    this.axios
-                        .post("/api/product/changeStatus", {
-                            product_num: row.ProductNum,
-                            status: 1,
-                        })
-                        .then((res) => {
-                            console.log(res);
-                            this.getlist();
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        });
+                // console.log(row);
+                if(this.personData.power === '超级管理员' || this.personData.power === '管理员'){
+                    if (row.Status === "已上架") {
+                        this.axios
+                            .post("/api/product/changeStatus", {
+                                product_num: row.ProductNum,
+                                status: 5,
+                            })
+                            .then((res) => {
+                                console.log(res);
+                                this.getlist();
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                    } else if (row.Status === "已下架") {
+                        this.axios
+                            .post("/api/product/changeStatus", {
+                                product_num: row.ProductNum,
+                                status: 1,
+                            })
+                            .then((res) => {
+                                console.log(res);
+                                this.getlist();
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                    }
+                }else {
+                    this.$message({
+                        message:"您的权限不足！",
+                        type:"warning"
+                    });
                 }
+
             },
-            //修改数据
+            //封装修改价格
             handleEdit(index, row, _value) {
                 console.log(index, row);
                 let num = _value - 0;
@@ -167,48 +177,65 @@
 
                 this.getlist();
             },
+            //修改数据
             alter(index, row) {
-                this.$prompt("重新定价", "注意", {
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                })
-                    .then(({ value }) => {
-                        this.$message({
-                            type: "success",
-                            message: "修改成功",
-                        });
-                        let _value = value - 0;
-                        this.handleEdit(index, row, _value);
+                if(this.personData.power === '超级管理员' ||this.personData.power === '管理员'){
+                    this.$prompt("重新定价", "注意", {
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消",
                     })
-                    .catch(() => {
-                        this.$message({
-                            type: "info",
-                            message: "取消输入",
+                        .then(({ value }) => {
+                            this.$message({
+                                type: "success",
+                                message: "修改成功",
+                            });
+                            let _value = value - 0;
+                            this.handleEdit(index, row, _value);
+                        })
+                        .catch(() => {
+                            this.$message({
+                                type: "info",
+                                message: "取消输入",
+                            });
                         });
+                }else {
+                    this.$message({
+                        message:"您的权限不足！",
+                        type:"warning"
                     });
+                }
+
             },
             //删除数据
             open(index, row) {
-                console.log(row);
-                console.log(row.ProductNum);
-                this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                    type: "warning",
-                })
-                    .then(() => {
-                        this.$message({
-                            type: "success",
-                            message: "删除成功!",
-                        });
-                        this.handleDelete(index, row);
+                // console.log(row);
+                // console.log(row.ProductNum);
+                if(this.personData.power === '超级管理员' ||this.personData.power === '管理员'){
+                    this.$confirm("此操作将永久删除该数据, 是否继续?", "提示", {
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消",
+                        type: "warning",
                     })
-                    .catch(() => {
-                        this.$message({
-                            type: "info",
-                            message: "已取消删除",
+                        .then(() => {
+                            this.$message({
+                                type: "success",
+                                message: "删除成功!",
+                            });
+                            this.handleDelete(index, row);
+                        })
+                        .catch(() => {
+                            this.$message({
+                                type: "info",
+                                message: "已取消删除",
+                            });
                         });
+                }else {
+                    this.$message({
+                        message:"您的权限不足！",
+                        type:"warning"
                     });
+                }
+
             },
             handleDelete(index, row) {
                 this.axios.post("/api/product/deleteProduct", {
@@ -220,6 +247,7 @@
 
         //监听属性 类似于data概念
         computed: {
+            ...mapState(['personData']),
             filterArr(){
                 if(this.index === '0'){
                     return this.list
@@ -258,6 +286,7 @@
         //生命周期 - 挂载完成（可以访问DOM元素）
         mounted() {
             this.getlist();
+            this.getPower()
         },
         beforeCreate() {}, //生命周期 - 创建之前
         beforeMount() {}, //生命周期 - 挂载之前

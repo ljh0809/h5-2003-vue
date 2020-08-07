@@ -43,8 +43,11 @@
 </template>
 
 <script>
+    import {mapActions,mapState} from 'vuex'
     export default {
+        computed:mapState(['personData']),
         methods:{
+            ...mapActions(['getPower']),
             // 获取数据
             getData(){
                 this.axios({
@@ -76,18 +79,25 @@
             },
             // 删除按钮
             handleDelete(index, row) {
-                console.log(row)
-                this.axios({
-                    url:'/api/product/deleteProduct',
-                    method:'post',
-                    data:{
-                        product_num:row.ProductNum
-                    }
-                })
-                    .then(res=>{
-                        console.log(res)
-                        this.getData()
-                    })
+               if(this.personData.power === '超级管理员' || this.personData.power === '管理员'){
+                   this.axios({
+                       url:'/api/product/deleteProduct',
+                       method:'post',
+                       data:{
+                           product_num:row.ProductNum
+                       }
+                   })
+                       .then(res=>{
+                           console.log(res)
+                           this.getData()
+                       })
+               }else {
+                   this.$message({
+                       message:"您的权限不足！",
+                       type:"warning"
+                   });
+               }
+
             },
             // 全选
             handleSelectionChange(val){
@@ -96,24 +106,33 @@
             },
             // 批量删除
             del(){
-                this.multipleSelection.forEach(item => {
-                    this.axios({
-                        url:'/api/product/deleteProduct',
-                        method:'post',
-                        data:{
-                            product_num:item.ProductNum
-                        }
-                    }).then(res=>{
-                        console.log(res)
-                        this.getData()
-                    })
-                });
+                if(this.personData.power === '超级管理员' || this.personData.power === '管理员'){
+                    this.multipleSelection.forEach(item => {
+                        this.axios({
+                            url:'/api/product/deleteProduct',
+                            method:'post',
+                            data:{
+                                product_num:item.ProductNum
+                            }
+                        }).then(res=>{
+                            console.log(res)
+                            this.getData()
+                        })
+                    });
+                }else {
+                    this.$message({
+                        message:"您的权限不足！",
+                        type:"warning"
+                    });
+                }
+
             }
 
         },
         // 页面初始渲染
         mounted(){
             this.getData()
+            this.getPower()
         },
         data() {
             return {

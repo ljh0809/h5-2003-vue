@@ -67,21 +67,34 @@
 </template>
 
 <script>
+    import {mapState,mapActions} from 'vuex'
 export default {
+
+    computed:mapState(['personData']),
+
     methods: {
+        ...mapActions(['getPower']),
         //删除订单
       handleClick(row) {
         // console.log(row);
-        this.axios({
-            url:'/api/product/deleteProduct',
-            method:'post',
-            data:{
-                product_num:row.ProductNum
-            }
-        })
-          .then(()=>{
-              this.getData();
-          })
+          if(this.personData.power === '超级管理员' || this.personData.power === '管理员'){
+              this.axios({
+                  url:'/api/product/deleteProduct',
+                  method:'post',
+                  data:{
+                      product_num:row.ProductNum
+                  }
+              })
+                  .then(()=>{
+                      this.getData();
+                  })
+          }else {
+              this.$message({
+                  message:"您的权限不足！",
+                  type:"warning"
+              });
+          }
+
       },
         //获取数据
         getData(){
@@ -129,6 +142,7 @@ export default {
     //页面初始加载一次
     mounted() {
         this.getData()
+        this.getPower()
     },
     data() {
       return {

@@ -5,7 +5,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-      home:{num:13884,merchants:443,designer:313,user:866},
       userData:[],//所有用户数据
       personData:'',//个人数据
       count:0,
@@ -13,13 +12,14 @@ export default new Vuex.Store({
 
 
   mutations: {
+      //个人数据
       getPresonData(state,payload){
           // console.log(payload)
           state.personData = payload
           //时间戳转成正常日期
           state.personData.registerTime = new Date(parseInt(  state.personData.registerTime)).toLocaleString().replace(/:\d{1,2}$/,' ');
       },
-
+        //所有用户数据
       getUserData(state,payload){
           // console.log(payload)
           state.count = payload.count;
